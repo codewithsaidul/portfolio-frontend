@@ -1,0 +1,1 @@
+export type { IProject, IProjectCardProps, IProjectTech } from "./project.types"

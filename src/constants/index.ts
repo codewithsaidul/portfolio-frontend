@@ -1,3 +1,4 @@
+import { IProject } from "@/types";
 import { Server } from "lucide-react";
 import { BiLogoFirebase } from "react-icons/bi";
 import { GiMagicLamp } from "react-icons/gi";
@@ -134,6 +135,93 @@ export const skillCategories = [
         color: "text-muted-forground",
         size: 24,
       },
+    ],
+  },
+];
+
+
+
+export const projects: IProject[] = [
+  {
+    id: 1,
+    title: "Rydex - Intelligent Ride Booking Platform",
+    thumbnail: "/projects/project1.webp",
+    clientLink: "https://github.com/codewithsaidul/ph-assignmen-six",
+    serverLink: "https://github.com/codewithsaidul/ph-assignmen-six",
+    liveLink: "https://rydex.vercel.app",
+    description:
+      "Rydex is a full-stack, role-based ride-booking platform engineered for a seamless and secure transportation experience for Riders, Drivers, and Administrators. It features interactive map-based booking with real-time fare estimation, live status notifications via WebSockets, and comprehensive dashboards for managing rides and users, creating a complete, production-grade application.",
+    categories: ["Full-Stack", "Real-time Application", "Geolocation"],
+    techs: [
+      { id: 1, name: "React" },
+      { id: 2, name: "Node.js" },
+      { id: 3, name: "TypeScript" },
+      { id: 4, name: "Redux Toolkit" },
+      { id: 5, name: "Express.JS" },
+      { id: 6, name: "Mongoose" },
+      { id: 7, name: "MongoDB" },
+      { id: 8, name: "Socket.IO" },
+      { id: 9, name: "ZOD" },
+      { id: 10, name: "Shadcn ui" },
+      { id: 11, name: "Tailwind CSS" },
+      { id: 12, name: "Leaflet.js" },
+    ],
+  },
+  {
+    id: 2,
+    title: "AI Mock InterView Platform",
+    thumbnail: "/projects/project2.webp",
+    clientLink: "https://github.com/codewithsaidul/cws_mock_interview_platform",
+    serverLink: null,
+    liveLink: "https://prepwise-sigma.vercel.app/",
+    description:
+      "PrepWise is an innovative platform that helps users prepare for interviews by offering mock interview sessions with personalized questions. The website provides users with the ability to generate interview questions based on their preferences, take mock interviews, and receive feedback, all through voice calls. Whether preparing for coding, behavioral, or system design interviews, PrepWise tailors each session to meet the specific needs of the user.",
+    categories: ["Full-Stack", "AI Platform", "Dashboard"],
+    techs: [
+      { id: 1, name: "shadcn UI" },
+      { id: 2, name: "TailwindCSS" },
+      { id: 3, name: "next JS" },
+      { id: 4, name: "typeScript" },
+      { id: 5, name: "react" },
+      { id: 6, name: "firebase" },
+      { id: 7, name: "react hook form" },
+      { id: 8, name: "vapi" },
+    ],
+  },
+  {
+    id: 3,
+    title: "Naxos NFT Website",
+    thumbnail: "/projects/project3.webp",
+    clientLink: "https://github.com/codewithsaidul/Naxos-NFT",
+    serverLink: null,
+    liveLink: "https://naxos-nft.vercel.app",
+    description:
+      "Naxos NFT is a digital marketplace built to simplify NFT discovery, trading, and collection. It offers a sleek user experience for Browse, minting, and managing NFTs, empowering creators and collectors in the growing world of digital assets. The platform makes it easy for users to discover unique digital art and collectibles, while creators can effortlessly mint and showcase their work.",
+    categories: ["FrontEnd", "Web3"],
+    techs: [
+      { id: 1, name: "react" },
+      { id: 2, name: "TailwindCSS" },
+      { id: 3, name: "next JS" },
+      { id: 4, name: "typeScript" },
+      { id: 5, name: "framer motion" },
+    ],
+  },
+  {
+    id: 4,
+    title: "Animate-X Movie Web Series Anime",
+    thumbnail: "/projects/project4.webp",
+    clientLink: "https://github.com/codewithsaidul/AnimateX",
+    serverLink: null,
+    liveLink: "https://animate-x.vercel.app",
+    description:
+      "Animate-X is a creative animation platform designed to make motion design simple and accessible. It allows users to create, customize, and preview web animations in real time, streamlining the workflow for developers and designers alike. By offering an intuitive interface, Animate-X helps users bring their design ideas to life with ease, whether for websites, mobile apps, or other digital platforms. The platform provides a wide range of customizable animation templates and tools that make the animation process faster and more efficient.",
+    categories: ["FrontEnd"],
+    techs: [
+      { id: 1, name: "react" },
+      { id: 2, name: "TailwindCSS" },
+      { id: 3, name: "swiper JS" },
+      { id: 4, name: "tanstack query" },
+      { id: 5, name: "API" },
     ],
   },
 ];
