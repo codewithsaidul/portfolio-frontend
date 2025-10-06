@@ -1,5 +1,5 @@
 import { IProject } from "@/types";
-import { Server } from "lucide-react";
+import { Code, Lightbulb, Server, Users, Zap } from "lucide-react";
 import { BiLogoFirebase } from "react-icons/bi";
 import { GiMagicLamp } from "react-icons/gi";
 import { GrMysql } from "react-icons/gr";
@@ -139,8 +139,6 @@ export const skillCategories = [
   },
 ];
 
-
-
 export const projects: IProject[] = [
   {
     id: 1,
@@ -224,4 +222,45 @@ export const projects: IProject[] = [
       { id: 5, name: "API" },
     ],
   },
+];
+
+export const highlights = [
+  {
+    icon: Code,
+    title: "Clean Code",
+    description: "Writing maintainable, scalable, and well-documented code",
+  },
+  {
+    icon: Lightbulb,
+    title: "Problem Solving",
+    description: "Creative solutions to complex technical challenges",
+  },
+  {
+    icon: Users,
+    title: "Collaboration",
+    description: "Effective teamwork and clear communication",
+  },
+  {
+    icon: Zap,
+    title: "Performance",
+    description: "Optimized applications for the best user experience",
+  },
+];
+
+export const technologies: string[] = [
+  "React",
+  "TypeScript",
+  "Next.js",
+  "Vue.js",
+  "Node.js",
+  "Tailwind CSS",
+  "SCSS",
+  "JavaScript ES6+",
+  "GraphQL",
+  "REST APIs",
+  "Git",
+  "Docker",
+  "AWS",
+  "MongoDB",
+  "PostgreSQL",
 ];

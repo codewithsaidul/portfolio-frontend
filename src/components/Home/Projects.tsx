@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { projects } from "@/constants";
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "../projects/ProjectCard";
 
 export default function Projects() {
   return (
