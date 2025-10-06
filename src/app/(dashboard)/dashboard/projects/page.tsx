@@ -1,0 +1,188 @@
+"use client"
+
+import { useState } from "react"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Plus, Pencil, Trash2, ExternalLink } from "lucide-react"
+import Image from "next/image"
+import { ProjectDialog } from "@/components/Dashboard/Dialog/ProjectDialog"
+import { DeleteDialog } from "@/components/Dashboard/Dialog/DeleteDialog"
+
+type Project = {
+  id: string
+  title: string
+  description: string
+  thumbnail: string
+  tags: string[]
+  url: string
+  status: "published" | "draft"
+  createdAt: string
+}
+
+const initialProjects: Project[] = [
+  {
+    id: "1",
+    title: "E-commerce Platform",
+    description: "A full-stack e-commerce solution with payment integration and admin dashboard",
+    thumbnail: "/ecommerce-platform-interface.png",
+    tags: ["Next.js", "TypeScript", "Stripe"],
+    url: "https://example.com/ecommerce",
+    status: "published",
+    createdAt: "2024-03-15",
+  },
+  {
+    id: "2",
+    title: "Task Management App",
+    description: "Collaborative task management tool with real-time updates and team features",
+    thumbnail: "/task-management-dashboard.png",
+    tags: ["React", "Firebase", "Tailwind"],
+    url: "https://example.com/tasks",
+    status: "published",
+    createdAt: "2024-02-28",
+  },
+  {
+    id: "3",
+    title: "Portfolio Website",
+    description: "Modern portfolio website with blog and project showcase",
+    thumbnail: "/portfolio-website-design.png",
+    tags: ["Next.js", "MDX", "Framer Motion"],
+    url: "https://example.com/portfolio",
+    status: "draft",
+    createdAt: "2024-01-10",
+  },
+]
+
+export default function ProjectsPage() {
+  const [projects, setProjects] = useState<Project[]>(initialProjects)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
+  const [editingProject, setEditingProject] = useState<Project | null>(null)
+  const [deletingProjectId, setDeletingProjectId] = useState<string | null>(null)
+
+  const handleCreate = (project: Omit<Project, "id" | "createdAt">) => {
+    const newProject: Project = {
+      ...project,
+      id: Date.now().toString(),
+      createdAt: new Date().toISOString().split("T")[0],
+    }
+    setProjects([newProject, ...projects])
+    setIsDialogOpen(false)
+  }
+
+  const handleUpdate = (updatedProject: Project) => {
+    setProjects(projects.map((p) => (p.id === updatedProject.id ? updatedProject : p)))
+    setIsDialogOpen(false)
+    setEditingProject(null)
+  }
+
+  const handleDelete = () => {
+    if (deletingProjectId) {
+      setProjects(projects.filter((p) => p.id !== deletingProjectId))
+      setIsDeleteDialogOpen(false)
+      setDeletingProjectId(null)
+    }
+  }
+
+  const openEditDialog = (project: Project) => {
+    setEditingProject(project)
+    setIsDialogOpen(true)
+  }
+
+  const openDeleteDialog = (projectId: string) => {
+    setDeletingProjectId(projectId)
+    setIsDeleteDialogOpen(true)
+  }
+
+  const closeDialog = () => {
+    setIsDialogOpen(false)
+    setEditingProject(null)
+  }
+
+  return (
+    <div className="flex flex-col gap-8 p-4 pt-20 sm:p-6 lg:p-8 lg:pt-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h1 className="mb-2 font-sans text-3xl font-semibold text-foreground">Projects</h1>
+          <p className="text-muted-foreground">Manage your portfolio projects</p>
+        </div>
+        <Button onClick={() => setIsDialogOpen(true)} className="gap-2">
+          <Plus className="h-4 w-4" />
+          New Project
+        </Button>
+      </div>
+
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {projects.map((project) => (
+          <Card key={project.id} className="group overflow-hidden border-border bg-card">
+            <div className="relative aspect-video max-h-52 overflow-hidden bg-muted">
+              <Image
+                src={project.thumbnail || "/placeholder.svg"}
+                alt={project.title}
+                fill
+                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+              />
+              <div className="absolute right-2 top-2">
+                <span
+                  className={`rounded-full px-2 py-1 text-xs font-medium ${
+                    project.status === "published"
+                      ? "bg-primary/20 text-primary"
+                      : "bg-muted-foreground/20 text-muted-foreground"
+                  }`}
+                >
+                  {project.status}
+                </span>
+              </div>
+            </div>
+            <CardHeader>
+              <CardTitle className="text-card-foreground">{project.title}</CardTitle>
+              <CardDescription className="line-clamp-2 text-muted-foreground">{project.description}</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="mb-4 flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="rounded-md bg-secondary px-2 py-1 text-xs text-secondary-foreground">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="flex-1 bg-transparent"
+                  onClick={() => openEditDialog(project)}
+                >
+                  <Pencil className="mr-2 h-3 w-3" />
+                  Edit
+                </Button>
+                <Button variant="outline" size="sm" onClick={() => openDeleteDialog(project.id)}>
+                  <Trash2 className="h-3 w-3" />
+                </Button>
+                <Button variant="outline" size="sm" asChild>
+                  <a href={project.url} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="h-3 w-3" />
+                  </a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      <ProjectDialog
+        open={isDialogOpen}
+        onOpenChange={closeDialog}
+        project={editingProject}
+        onSave={editingProject ? handleUpdate : handleCreate}
+      />
+
+      <DeleteDialog
+        open={isDeleteDialogOpen}
+        onOpenChange={setIsDeleteDialogOpen}
+        onConfirm={handleDelete}
+        title="Delete Project"
+        description="Are you sure you want to delete this project? This action cannot be undone."
+      />
+    </div>
+  )
+}
