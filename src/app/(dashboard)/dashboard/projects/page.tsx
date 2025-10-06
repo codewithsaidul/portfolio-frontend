@@ -113,7 +113,7 @@ export default function ProjectsPage() {
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
-          <Card key={project.id} className="group overflow-hidden border-border bg-card">
+          <Card key={project.id} className="group flex flex-col h-auto overflow-hidden border-border bg-card">
             <div className="relative aspect-video max-h-52 overflow-hidden bg-muted">
               <Image
                 src={project.thumbnail || "/placeholder.svg"}
@@ -137,7 +137,7 @@ export default function ProjectsPage() {
               <CardTitle className="text-card-foreground">{project.title}</CardTitle>
               <CardDescription className="line-clamp-2 text-muted-foreground">{project.description}</CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="mt-auto">
               <div className="mb-4 flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
                   <span key={tag} className="rounded-md bg-secondary px-2 py-1 text-xs text-secondary-foreground">
